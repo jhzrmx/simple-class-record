@@ -87,8 +87,8 @@ function deleteTableData() {
 		for (var i = $("#my-table").rows.length-1; i > 0; i--) {
 			$("#my-table").deleteRow(i);
 		}
-		students = [];
-		scores = [];
+		students.length = 0;
+		scores.length = 0;
 	}
 }
 
