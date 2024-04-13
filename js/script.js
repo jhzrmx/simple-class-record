@@ -46,6 +46,7 @@ function editRow(link) {
 	let score = row.cells[1].textContent.trim().split("/");
 	row.cells[1].innerHTML = `<input id="edit-score" type="text" style="margin-bottom: 0; width: 4em;" value="${score[0]}"> / <input id="edit-total" type="text" style="margin-bottom: 0; width: 4em;" value="${score[1]}">`;
 	row.cells[2].innerHTML = '--% (------)';
+	row.cells[2].style.color = "black";
 	row.cells[3].innerHTML = `<a href="#" onclick="updateRow(this)">Update</a>`;
 }
 
