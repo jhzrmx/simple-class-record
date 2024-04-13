@@ -1,5 +1,7 @@
 var actions = '<a href="#" onclick="editRow(this)">Edit</a> <a href="#" onclick="deleteRow(this)">Delete</a>';
 var isUpdate = false;
+const students = [];
+const scores = [];
 
 function $(args) {
 	return document.querySelector(args);
@@ -23,11 +25,15 @@ function addStudent() {
 		alert("Ooops, score must be less than or equal to total");
 		return;
 	}
-	row.insertCell(0).innerHTML = $("#l-name").value + ", " + $("#f-name").value + " " + $("#m-name").value + ".";
-	row.insertCell(1).innerHTML = $("#score").value + "/" + $("#total").value;
+	let fullName = $("#l-name").value + ", " + $("#f-name").value + " " + $("#m-name").value + ".";
+	let score = $("#score").value + "/" + $("#total").value;
+	row.insertCell(0).innerHTML = fullName;
+	row.insertCell(1).innerHTML = score;
 	row.insertCell(2).innerHTML = scorePercent + "% (" + (scorePercent >= 75 ? "Passed" : "Failed") + ")";
 	row.cells[2].style.color = scorePercent >= 75 ? "green" : "red";
 	row.insertCell(3).innerHTML = actions;
+	students.push(fullName);
+	scores.push(score);
 	clearFields();
 }
 
@@ -36,6 +42,8 @@ function deleteRow(link) {
 		let row = link.parentNode.parentNode;
 		let table = row.parentNode;
 		table.deleteRow(row.rowIndex);
+		students.splice(row.rowIndex-1, 1);
+		scores.splice(row.rowIndex-1, 1);
 	}
 }
 
@@ -69,6 +77,8 @@ function updateRow(link) {
 	row.cells[1].innerHTML = score + "/" + total;
 	row.cells[2].innerHTML = scorePercent + "% (" + (scorePercent >= 75 ? "Passed" : "Failed") + ")";
 	row.cells[2].style.color = scorePercent >= 75 ? "green" : "red";
+	students[row.rowIndex-1] = name;
+	scores[row.rowIndex-1] = score + "/" + total;
 	row.cells[3].innerHTML = actions;
 }
 
@@ -77,6 +87,8 @@ function deleteTableData() {
 		for (var i = $("#my-table").rows.length-1; i > 0; i--) {
 			$("#my-table").deleteRow(i);
 		}
+		students = [];
+		scores = [];
 	}
 }
 
