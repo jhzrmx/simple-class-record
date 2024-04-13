@@ -26,6 +26,7 @@ function addStudent() {
 	row.insertCell(0).innerHTML = $("#l-name").value + ", " + $("#f-name").value + " " + $("#m-name").value + ".";
 	row.insertCell(1).innerHTML = $("#score").value + "/" + $("#total").value;
 	row.insertCell(2).innerHTML = scorePercent + "% (" + (scorePercent >= 75 ? "Passed" : "Failed") + ")";
+	row.cells[2].style.color = scorePercent >= 75 ? "green" : "red";
 	row.insertCell(3).innerHTML = actions;
 	clearFields();
 }
@@ -66,6 +67,7 @@ function updateRow(link) {
 	row.cells[0].innerHTML = name;
 	row.cells[1].innerHTML = score + "/" + total;
 	row.cells[2].innerHTML = scorePercent + "% (" + (scorePercent >= 75 ? "Passed" : "Failed") + ")";
+	row.cells[2].style.color = scorePercent >= 75 ? "green" : "red";
 	row.cells[3].innerHTML = actions;
 }
 
